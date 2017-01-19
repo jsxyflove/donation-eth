@@ -1,0 +1,43 @@
+pragma solidity ^0.4.0;
+contract owned {
+    address public owner;
+
+    function owned() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        if (msg.sender != owner) throw;
+        _;
+    }
+}
+contract ReiceValue {
+    uint AverageValue;
+    uint ReiceAmount;
+    uint TotalValue;
+
+    function set(uint x,uint y) {
+        AverageValue = x;
+        ReiceAmount = y;
+        TotalValue = x * y;
+    }
+
+    function get() constant returns (uint) {
+        return TotalValue;
+    }
+}
+contract Token {
+    address public owner;
+    mapping (address => uint) public balances;
+
+    // Events allow light clients to react on
+    // changes efficiently.
+    event Sent(address from, address to, uint amount);
+
+    // This is the constructor whose code is
+    // run only when the contract is created.
+    function Token() {
+        owner = msg.sender;
+    }
+    
+}
