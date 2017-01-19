@@ -17,9 +17,8 @@ contract Token {
     event dona(address indexed from, address indexed to, uint256 value);
     function donation() payable {
         uint donacoin=10000000;
-        if (balanceOf[this] < donacoin) throw;               // checks if it has enough to sell
-        balanceOf[msg.sender] += donacoin;                   // adds the amount to buyer's balance
-        balanceOf[this] -= donacoin;                         // subtracts amount from seller's balance
+        uint256 receiverAmount;
+        uint256 receiverAveragevalue;
         dona(this, msg.sender, donacoin);  
     }
     address public owner;
@@ -34,16 +33,12 @@ contract Token {
     function Token() {
         owner = msg.sender;
     }
+    
     address public receiver;
     mapping (address => uint) public balances;
- 
-    function receiver(
-     uint256 receiverAmount,
-     uint256 receiverAveragevalue
-    )
-        Amount=receiverAmount;
-        Averagevalue=receiverAveragevalue;
+    function receiver{
     }
+     
     function distribution(address receiver, uint amount) {
         if (balances[msg.sender] < amount) return;
         balances[msg.sender] -= amount;
