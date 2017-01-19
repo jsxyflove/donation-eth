@@ -1,0 +1,53 @@
+pragma solidity ^0.4.0;
+contract owned {
+    address public owner;
+
+    function owned() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        if (msg.sender != owner) throw;
+        _;
+    }
+}
+contract Token {
+    address public donator;
+    mapping (address => uint256) public balanceOf;
+    event dona(address indexed from, address indexed to, uint256 value);
+    function donation() payable {
+        uint donacoin=10000000;
+        if (balanceOf[this] < donacoin) throw;               // checks if it has enough to sell
+        balanceOf[msg.sender] += donacoin;                   // adds the amount to buyer's balance
+        balanceOf[this] -= donacoin;                         // subtracts amount from seller's balance
+        dona(this, msg.sender, donacoin);  
+    }
+    address public owner;
+    mapping (address => uint) public balances;
+
+    // Events allow light clients to react on
+    // changes efficiently.
+    event Sent(address from, address to, uint amount);
+
+    // This is the constructor whose code is
+    // run only when the contract is created.
+    function Token() {
+        owner = msg.sender;
+    }
+    address public receiver;
+    mapping (address => uint) public balances;
+ 
+    function receiver(
+     uint256 receiverAmount,
+     uint256 receiverAveragevalue
+    )
+        Amount=receiverAmount;
+        Averagevalue=receiverAveragevalue;
+    }
+    function distribution(address receiver, uint amount) {
+        if (balances[msg.sender] < amount) return;
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        Sent(msg.sender, receiver, amount);
+    }
+}
