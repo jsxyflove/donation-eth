@@ -34,7 +34,7 @@ contract Token {
         ReiceAmount = y;
         TotalValue = x * y;
     }
-    function get() constant returns (uint) {
+    function need() constant returns (uint) {
         return TotalValue;
     }
     modifier applyTotalValue() { // Modifier
@@ -42,15 +42,15 @@ contract Token {
         _;
     }
 
-    function send(address receiver1,address receiver2,address receiver3, uint TotalValue) {
-        if (balance[msg.sender] < TotalValue) return;
-        balance[msg.sender] -= TotalValue;
-        balance[receiver1] += TotalValue/3;
-        balance[receiver2] += TotalValue/3;
-        balance[receiver3] += TotalValue/3;
-        Sent(msg.sender, receiver1, TotalValue/3);
-        Sent(msg.sender, receiver2, TotalValue/3);
-        Sent(msg.sender, receiver3, TotalValue/3);
+    function send(address receiver1,address receiver2,address receiver3, uint applyTotalValue) {
+        if (balance[msg.sender] < applyTotalValue) return;
+        balance[msg.sender] -= applyTotalValue;
+        balance[receiver1] += applyTotalValue/3;
+        balance[receiver2] += applyTotalValue/3;
+        balance[receiver3] += applyTotalValue/3;
+        Sent(msg.sender, receiver1, applyTotalValue/3);
+        Sent(msg.sender, receiver2, applyTotalValue/3);
+        Sent(msg.sender, receiver3, applyTotalValue/3);
     }
     
 }
